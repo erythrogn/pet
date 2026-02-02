@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}PawParadise - Onde Seu Pet é Realeza{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-content">
+        <span class="reveal" style="color: var(--secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 10px;">Cuidado Premium</span>
+        <h1 class="reveal">Onde Seu Pet é <br>Tratado como Rei</h1>
+        <p class="reveal">Proporcione ao seu melhor amigo uma experiência de bem-estar completa. Hotelaria, estética e saúde com monitoramento 24 horas.</p>
+        
+        <div class="cta-wrapper reveal" style="margin-top: 2rem;">
+            <a href="{{ url_for('contato') }}" class="btn-neon">Agendar Visita <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    <div class="hero-image reveal">
+        <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Cachorro Feliz">
+    </div>
+</section>
+
+<div class="marquee-container">
+    <div class="marquee-content">
+        <span>
+            BANHO & TOSA &nbsp;•&nbsp; HOTEL 5 ESTRELAS &nbsp;•&nbsp; VETERINÁRIO 24H &nbsp;•&nbsp; DAY CARE &nbsp;•&nbsp; SPA PET &nbsp;•&nbsp; 
+            BANHO & TOSA &nbsp;•&nbsp; HOTEL 5 ESTRELAS &nbsp;•&nbsp; VETERINÁRIO 24H &nbsp;•&nbsp; DAY CARE &nbsp;•&nbsp; SPA PET &nbsp;•&nbsp;
+        </span>
+    </div>
+</div>
+
+<section id="servicos" class="page-content">
+    <div style="text-align: center; margin-bottom: 4rem;">
+        <h2 class="reveal">Tudo em um só lugar</h2>
+        <p class="reveal">Serviços pensados para a felicidade do seu pet e sua tranquilidade.</p>
+    </div>
+    
+    <div class="services-grid">
+        {% for servico in servicos %}
+        <div class="service-card reveal">
+            <div style="font-size: 3.5rem; margin-bottom: 1.5rem;">{{ servico.emoji }}</div>
+            <h3>{{ servico.nome }}</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">{{ servico.descricao }}</p>
+            <a href="{{ url_for('servicos') }}" style="color: var(--primary); font-weight: 700; font-size: 0.9rem;">SAIBA MAIS <i class="fas fa-chevron-right"></i></a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="depoimentos" class="page-content" style="background: #fff; border-radius: 30px; margin-bottom: 4rem;">
+    <h2 class="reveal" style="text-align: center;">O Que Dizem Nossos Clientes</h2>
+    <div class="testimonials-grid">
+        {% for depoimento in depoimentos %}
+        <div class="testimonial-card reveal">
+            <div style="color: var(--accent); margin-bottom: 1rem;">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p style="font-style: italic; margin-bottom: 1.5rem;">"{{ depoimento.texto }}"</p>
+            <p style="font-weight: 700; color: var(--primary);">— {{ depoimento.autor }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="reveal" style="text-align: center; padding: 4rem 0;">
+    <h2>Pronto para surpreender seu pet?</h2>
+    <p style="margin-bottom: 2rem;">Entre em contato hoje mesmo e conheça nossa estrutura.</p>
+    <a href="{{ url_for('contato') }}" class="btn-primary">Fale Conosco Agora</a>
+</section>
+
+{% endblock %}

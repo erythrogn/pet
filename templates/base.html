@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PawParadise - PetCare Premium{% endblock %}</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        <i class="fas fa-info-circle"></i> {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <aside class="yarn-sidebar">
+        <div class="sidebar-logo">
+            <i class="fas fa-paw"></i>
+        </div>
+
+        <nav class="yarn-nav">
+            <div class="yarn-string"></div>
+
+            <a href="{{ url_for('index') }}" class="yarn-ball" title="Início">
+                <div class="ball-texture"></div>
+                <i class="fas fa-home"></i>
+                <span class="yarn-label">Início</span>
+            </a>
+
+            <a href="{{ url_for('servicos') }}" class="yarn-ball" title="Serviços">
+                <div class="ball-texture"></div>
+                <i class="fas fa-bone"></i>
+                <span class="yarn-label">Serviços</span>
+            </a>
+
+            <a href="{{ url_for('sobre') }}" class="yarn-ball" title="Sobre Nós">
+                <div class="ball-texture"></div>
+                <i class="fas fa-heart"></i>
+                <span class="yarn-label">Sobre</span>
+            </a>
+
+            <a href="{{ url_for('contato') }}" class="yarn-ball cta" title="Contato">
+                <div class="ball-texture"></div>
+                <i class="fas fa-envelope"></i>
+                <span class="yarn-label">Contato</span>
+            </a>
+        </nav>
+    </aside>
+
+    <div class="mobile-header">
+        <span class="mobile-logo"><i class="fas fa-paw"></i> PawParadise</span>
+        <button id="mobile-toggle"><i class="fas fa-bars"></i></button>
+    </div>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>PawParadise</h3>
+                <p>Amor em cada detalhe.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Links</h3>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('servicos') }}">Serviços</a></li>
+                    <li><a href="{{ url_for('contato') }}">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 PawParadise.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
