@@ -15,19 +15,19 @@
     }
 
     function init() {
-        console.log('🧶 Sistema de animação Timeline iniciado');
+        console.log('Sistema de animação Timeline iniciado');
         initTimelineLine();
         initTimelineItems();
         initRevealElements();
         initHeader();
         initMobileMenu();
-        console.log('✅ Todas as animações configuradas');
+        console.log('Todas as animações configuradas');
     }
 
     function initTimelineLine() {
         const timeline = document.querySelector('.yarn-timeline');
         if (!timeline) {
-            console.warn('⚠️ Timeline não encontrada');
+            console.warn('Timeline não encontrada');
             return;
         }
         const observer = new IntersectionObserver((entries) => {
@@ -49,17 +49,17 @@
     function initTimelineItems() {
         const timelineItems = document.querySelectorAll('.timeline-item');
         if (timelineItems.length === 0) {
-            console.warn('⚠️ Nenhum item da timeline encontrado');
+            console.warn('Nenhum item da timeline encontrado');
             return;
         }
-        console.log(`📍 ${timelineItems.length} items da timeline detectados`);
+        console.log(`${timelineItems.length} items da timeline detectados`);
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
                     const delay = index * CONFIG.cascadeDelay;
                     setTimeout(() => {
                         entry.target.classList.add('active');
-                        console.log(`✨ Item ${index + 1} ativado`);
+                        console.log(`Item ${index + 1} ativado`);
                     }, delay);
                     if (CONFIG.animateOnce) {
                         observer.unobserve(entry.target);
@@ -80,7 +80,7 @@
         if (revealElements.length === 0) {
             return;
         }
-        console.log(`👁️ ${revealElements.length} elementos reveal detectados`);
+        console.log(`${revealElements.length} elementos reveal detectados`);
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
@@ -141,7 +141,7 @@
         if (!mobileMenuBtn || !sidebar) {
             return;
         }
-        console.log('📱 Menu mobile inicializado (Correção Aplicada)');
+        console.log('Menu mobile inicializado (Correção Aplicada)');
         mobileMenuBtn.addEventListener('click', (e) => {
             e.preventDefault();
             sidebar.classList.toggle('active');
@@ -205,5 +205,5 @@
         window.addEventListener('scroll', handleScroll, { passive: true });
     }
 
-    console.log('⏱️ Script carregado em:', performance.now().toFixed(2), 'ms');
+    console.log('Script carregado em:', performance.now().toFixed(2), 'ms');
 })();
