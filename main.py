@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
-app.secret_key = 'sua_chave_segura_aqui'
+app.secret_key = '12345678'
 
 def get_servicos():
     return [
