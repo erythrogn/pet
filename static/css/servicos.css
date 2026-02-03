@@ -1,0 +1,445 @@
+/* =================================================================
+   TIMELINE DE SERVIÇOS - ANIMAÇÃO FIO DE LÃ
+   ================================================================= */
+
+/* ===== CONTAINER PRINCIPAL ===== */
+.yarn-timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ===== LINHA CENTRAL VERTICAL (FIO PRINCIPAL) ===== */
+.yarn-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background: repeating-linear-gradient(
+        to bottom,
+        var(--primary) 0,
+        var(--primary) 10px,
+        transparent 10px,
+        transparent 20px
+    );
+    transform: translateX(-50%);
+    z-index: 0;
+    /* Animação de crescimento da linha */
+    height: 0;
+    transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.yarn-timeline.line-active::before {
+    height: 100%;
+}
+
+/* ===== ITEM DA TIMELINE ===== */
+.timeline-item {
+    width: 50%;
+    position: relative;
+    margin-bottom: 60px;
+    box-sizing: border-box;
+    z-index: 1;
+    /* Estado inicial - invisível */
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Items à esquerda (ímpares) */
+.timeline-item:nth-child(odd) {
+    align-self: flex-start;
+    padding-right: 60px;
+    text-align: right;
+    /* Animação de entrada pela esquerda */
+    transform: translateX(-50px);
+}
+
+/* Items à direita (pares) */
+.timeline-item:nth-child(even) {
+    align-self: flex-end;
+    padding-left: 60px;
+    text-align: left;
+    /* Animação de entrada pela direita */
+    transform: translateX(50px);
+}
+
+/* ===== ESTADO ATIVO DO ITEM ===== */
+.timeline-item.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===== CARD DE SERVIÇO ===== */
+.yarn-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+    width: 100%;
+    /* Estado inicial - escondido e abaixo */
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    transition-delay: 0.3s;
+}
+
+/* Card visível */
+.timeline-item.active .yarn-card {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Hover no card */
+.yarn-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+}
+
+/* ===== ESTILO DO CONTEÚDO DO CARD ===== */
+.yarn-card h3 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.yarn-card ul {
+    margin: 1rem 0;
+    color: var(--text-muted);
+    list-style: none;
+    padding: 0;
+}
+
+.yarn-card li {
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s ease;
+}
+
+/* Animação cascata dos itens da lista */
+.timeline-item.active .yarn-card li {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timeline-item.active .yarn-card li:nth-child(1) { transition-delay: 0.5s; }
+.timeline-item.active .yarn-card li:nth-child(2) { transition-delay: 0.6s; }
+.timeline-item.active .yarn-card li:nth-child(3) { transition-delay: 0.7s; }
+.timeline-item.active .yarn-card li:nth-child(4) { transition-delay: 0.8s; }
+.timeline-item.active .yarn-card li:nth-child(5) { transition-delay: 0.9s; }
+
+.yarn-card li i {
+    color: var(--secondary);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+/* Ajuste de lista para itens à esquerda */
+.timeline-item:nth-child(odd) .yarn-card li {
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    transform: translateX(10px);
+}
+
+/* ===== CONECTORES HORIZONTAIS (FIOS) ===== */
+
+/* Fio para items ímpares (direita → centro) */
+.timeline-item:nth-child(odd) .yarn-card::after {
+    content: '';
+    position: absolute;
+    top: 32px;
+    right: -60px;
+    height: 4px;
+    background: linear-gradient(
+        to right,
+        var(--primary),
+        var(--primary) 80%,
+        transparent
+    );
+    border-radius: 2px;
+    /* Estado inicial */
+    width: 0;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.1s;
+}
+
+/* Fio para items pares (esquerda → centro) */
+.timeline-item:nth-child(even) .yarn-card::after {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: -60px;
+    height: 4px;
+    background: linear-gradient(
+        to left,
+        var(--primary),
+        var(--primary) 80%,
+        transparent
+    );
+    border-radius: 2px;
+    /* Estado inicial */
+    width: 0;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.1s;
+}
+
+/* Ativação dos fios quando item aparece */
+.timeline-item.active:nth-child(odd) .yarn-card::after,
+.timeline-item.active:nth-child(even) .yarn-card::after {
+    width: 60px;
+    opacity: 1;
+}
+
+/* ===== NÓS/BOLINHAS (PONTOS DE CONEXÃO) ===== */
+
+/* Bolinha para items ímpares */
+.timeline-item:nth-child(odd) .yarn-card::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    right: -68px;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 50%;
+    border: 4px solid var(--white);
+    box-shadow: 0 0 0 4px var(--primary);
+    z-index: 3;
+    /* Estado inicial */
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition-delay: 0s;
+}
+
+/* Bolinha para items pares */
+.timeline-item:nth-child(even) .yarn-card::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: -68px;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 50%;
+    border: 4px solid var(--white);
+    box-shadow: 0 0 0 4px var(--primary);
+    z-index: 3;
+    /* Estado inicial */
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition-delay: 0s;
+}
+
+/* Ativação das bolinhas com efeito "pop" */
+.timeline-item.active .yarn-card::before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Pulso nas bolinhas quando ativas */
+@keyframes pulse-dot {
+    0%, 100% {
+        box-shadow: 0 0 0 4px var(--primary);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(255, 87, 87, 0.3);
+    }
+}
+
+.timeline-item.active .yarn-card::before {
+    animation: pulse-dot 2s ease-in-out infinite;
+    animation-delay: 0.8s;
+}
+
+/* ===== FIM DA TIMELINE ===== */
+.yarn-end {
+    text-align: center;
+    background: var(--light);
+    padding: 30px;
+    border-radius: var(--radius-md);
+    position: relative;
+    z-index: 2;
+    align-self: center;
+    margin-top: 40px;
+    max-width: 300px;
+    /* Estado inicial */
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.yarn-end.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.yarn-ball-icon {
+    font-size: 3.5rem;
+    color: var(--primary);
+    display: inline-block;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-15px) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(0) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-8px) rotate(5deg);
+    }
+}
+
+/* ===== ELEMENTOS REVEAL GENÉRICOS ===== */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 900px) {
+    /* Linha vertical à esquerda no mobile */
+    .yarn-timeline::before {
+        left: 30px;
+    }
+    
+    /* Todos os items ficam à direita da linha */
+    .timeline-item,
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        width: 100%;
+        align-self: flex-start;
+        text-align: left;
+        padding: 0 0 0 70px;
+        margin-bottom: 50px;
+        transform: translateX(30px);
+    }
+    
+    .timeline-item.active {
+        transform: translateX(0);
+    }
+    
+    /* Ajuste das listas no mobile */
+    .timeline-item:nth-child(odd) .yarn-card li {
+        justify-content: flex-start;
+        flex-direction: row;
+        transform: translateX(-10px);
+    }
+    
+    .timeline-item.active:nth-child(odd) .yarn-card li {
+        transform: translateX(0);
+    }
+    
+    /* Fios horizontais no mobile */
+    .timeline-item:nth-child(odd) .yarn-card::after,
+    .timeline-item:nth-child(even) .yarn-card::after {
+        left: -40px;
+        right: auto;
+        background: linear-gradient(
+            to left,
+            var(--primary),
+            var(--primary) 80%,
+            transparent
+        );
+    }
+    
+    .timeline-item.active:nth-child(odd) .yarn-card::after,
+    .timeline-item.active:nth-child(even) .yarn-card::after {
+        width: 40px;
+    }
+    
+    /* Bolinhas no mobile */
+    .timeline-item:nth-child(odd) .yarn-card::before,
+    .timeline-item:nth-child(even) .yarn-card::before {
+        left: -48px;
+        right: auto;
+    }
+    
+    .yarn-end {
+        margin-left: 70px;
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .yarn-timeline {
+        padding: 40px 10px;
+    }
+    
+    .yarn-card {
+        padding: 1.5rem;
+    }
+    
+    .yarn-ball-icon {
+        font-size: 2.5rem;
+    }
+}
+
+/* ===== DETALHES EXTRAS (FAQ) ===== */
+details {
+    background: white;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+details:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-left-color: var(--primary);
+}
+
+details[open] {
+    border-left-color: var(--primary);
+}
+
+summary {
+    font-weight: 600;
+    color: var(--dark);
+    outline: none;
+    user-select: none;
+}
+
+summary::marker {
+    color: var(--primary);
+}
+
+details p {
+    margin-top: 1rem;
+    color: var(--text-body);
+    line-height: 1.6;
+    padding-left: 1rem;
+}

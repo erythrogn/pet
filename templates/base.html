@@ -3,18 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}PawParadise - PetCare Premium{% endblock %}</title>
+    <meta name="description" content="PawParadise - Centro Veterinário e Hotel 5 Estrelas. Atendimento 24h, especialistas, cirurgias complexas e estética animal.">
+    <meta name="keywords" content="veterinário, hotel pet, banho e tosa, emergência 24h, clínica veterinária">
+    <meta name="theme-color" content="#FF7B4A">
+    
+    <title>{% block title %}PawParadise - Excelência em Medicina Veterinária{% endblock %}</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% block styles %}{% endblock %}
 </head>
 <body>
     
+    <div class="emergency-bar" style="background: var(--dark); color: white; padding: 10px 0; text-align: center; font-size: 0.9rem; position: relative; z-index: 2001; padding-left: var(--sidebar-width);">
+        <span><i class="fas fa-ambulance" style="color: var(--danger);"></i> <strong>EMERGÊNCIA 24H:</strong> (11) 99999-9999</span>
+        <span style="margin: 0 15px;">|</span>
+        <span><i class="fas fa-map-marker-alt"></i> Av. dos Pets, 1000 - Jardins</span>
+    </div>
+
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class="flash-container">
@@ -41,55 +51,69 @@
                 <span class="yarn-label">Início</span>
             </a>
 
-            <a href="{{ url_for('servicos') }}" class="yarn-ball" title="Serviços">
+            <a href="{{ url_for('servicos') }}" class="yarn-ball" title="Especialidades">
                 <div class="ball-texture"></div>
-                <i class="fas fa-bone"></i>
+                <i class="fas fa-stethoscope"></i>
                 <span class="yarn-label">Serviços</span>
             </a>
 
-            <a href="{{ url_for('sobre') }}" class="yarn-ball" title="Sobre Nós">
+            <a href="{{ url_for('sobre') }}" class="yarn-ball" title="O Hospital">
                 <div class="ball-texture"></div>
-                <i class="fas fa-heart"></i>
-                <span class="yarn-label">Sobre</span>
+                <i class="fas fa-hospital"></i>
+                <span class="yarn-label">Hospital</span>
             </a>
 
-            <a href="{{ url_for('contato') }}" class="yarn-ball cta" title="Contato">
+            <a href="{{ url_for('contato') }}" class="yarn-ball cta" title="Agendamento">
                 <div class="ball-texture"></div>
-                <i class="fas fa-envelope"></i>
-                <span class="yarn-label">Contato</span>
+                <i class="fas fa-calendar-check"></i>
+                <span class="yarn-label">Agendar</span>
             </a>
         </nav>
     </aside>
 
     <div class="mobile-header">
         <span class="mobile-logo"><i class="fas fa-paw"></i> PawParadise</span>
-        <button id="mobile-toggle"><i class="fas fa-bars"></i></button>
+        <button id="mobile-toggle" aria-label="Abrir Menu"><i class="fas fa-bars"></i></button>
     </div>
 
     <main>
         {% block content %}{% endblock %}
     </main>
 
+    <a href="https://wa.me/5511999999999" target="_blank" class="whatsapp-float" style="position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 5000; transition: transform 0.3s;">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>PawParadise</h3>
-                <p>Amor em cada detalhe.</p>
+                <p>Medicina Veterinária de Excelência e Hotelaria 5 Estrelas.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
             <div class="footer-section">
-                <h3>Links</h3>
+                <h3>Acesso Rápido</h3>
                 <ul class="footer-links">
-                    <li><a href="{{ url_for('servicos') }}">Serviços</a></li>
-                    <li><a href="{{ url_for('contato') }}">Contato</a></li>
+                    <li><a href="{{ url_for('servicos') }}">Especialidades Médicas</a></li>
+                    <li><a href="{{ url_for('servicos') }}#hotel">Hotel & Daycare</a></li>
+                    <li><a href="{{ url_for('contato') }}">Trabalhe Conosco</a></li>
+                    <li><a href="{{ url_for('contato') }}">Política de Privacidade</a></li>
                 </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Certificações</h3>
+                <div style="display: flex; gap: 10px; font-size: 2rem; color: #aaa;">
+                    <i class="fas fa-shield-alt" title="Certificado Sanitário"></i>
+                    <i class="fas fa-award" title="Prêmio Top Vet"></i>
+                </div>
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2026 PawParadise.</p>
+            <p>&copy; 2026 PawParadise Centro Veterinário. CRMV-SP 00000.</p>
         </div>
     </footer>
 

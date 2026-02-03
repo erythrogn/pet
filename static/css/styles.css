@@ -1,6 +1,6 @@
-/* ============================================
+/* ==========================================================================
    1. VARIÁVEIS & CONFIGURAÇÕES GERAIS
-   ============================================ */
+   ========================================================================== */
 :root {
     /* Paleta de Cores */
     --primary: #FF7B4A;          /* Laranja Vibrante */
@@ -22,7 +22,7 @@
     --white: #FFFFFF;
     
     /* Layout */
-    --sidebar-width: 110px;      /* Largura do Menu Lateral */
+    --sidebar-width: 110px;      
     --container-width: 1200px;
     --header-height-mobile: 70px;
     
@@ -30,23 +30,23 @@
     --radius-sm: 12px;
     --radius-md: 24px;
     --radius-full: 50px;
+    
     --shadow-sm: 0 4px 6px rgba(0,0,0,0.02);
     --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
     --shadow-lg: 0 20px 40px rgba(255, 123, 74, 0.15);
 
     /* Animações */
-    --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efeito elástico */
+    --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Reset Básico */
+/* ==========================================================================
+   2. RESET & TIPOGRAFIA
+   ========================================================================== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
-::selection {
-    background: var(--primary);
-    color: var(--white);
-}
+::selection { background: var(--primary); color: var(--white); }
 
 body {
     background-color: var(--light);
@@ -55,12 +55,8 @@ body {
     line-height: 1.7;
     font-size: 16px;
     overflow-x: hidden;
-    /* Importante: Espaço à esquerda para o menu lateral fixo */
-    padding-left: var(--sidebar-width);
+    padding-left: var(--sidebar-width); /* Espaço para sidebar */
 }
-
-/* Esconde header antigo se ele ainda existir no HTML por engano */
-body > header { display: none; }
 
 h1, h2, h3, h4 {
     font-family: 'Barlow Condensed', sans-serif;
@@ -78,181 +74,16 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 ul { list-style: none; }
 img { max-width: 100%; height: auto; display: block; }
 
-/* ============================================
-   2. MENU LATERAL "NOVELO DE LÃ" (Desktop)
-   ============================================ */
-.yarn-sidebar {
-    position: fixed;
-    top: 0; left: 0;
-    width: var(--sidebar-width);
-    height: 100vh;
-    background: var(--white);
-    box-shadow: 4px 0 20px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 0;
-    z-index: 1000;
-    border-right: 1px solid rgba(0,0,0,0.02);
-}
-
-.sidebar-logo {
-    font-size: 2.2rem;
-    color: var(--primary);
-    margin-bottom: 3rem;
-    filter: drop-shadow(0 4px 6px rgba(255, 123, 74, 0.3));
-    transition: var(--transition);
-}
-
-.sidebar-logo:hover { transform: scale(1.1) rotate(-10deg); }
-
-.yarn-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem; /* Espaço entre os novelos */
-    position: relative;
-    width: 100%;
-}
-
-/* O fio vertical que conecta os novelos */
-.yarn-string {
-    position: absolute;
-    top: 0; bottom: 0; left: 50%;
-    width: 3px;
-    background: #E0E0E0;
-    /* Textura de corda */
-    background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px);
-    transform: translateX(-50%);
-    z-index: 0;
-}
-
-/* O Botão "Novelo" */
-.yarn-ball {
-    position: relative;
-    width: 55px; height: 55px;
-    border-radius: 50%;
-    background: var(--light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    font-size: 1.2rem;
-    z-index: 1;
-    transition: var(--transition);
-    border: 3px solid var(--white);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-/* Textura de Lã (CSS Gradient) */
-.ball-texture {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    border-radius: 50%;
-    background: repeating-linear-gradient(
-        45deg,
-        rgba(0,0,0,0.03),
-        rgba(0,0,0,0.03) 2px,
-        transparent 2px,
-        transparent 4px
-    );
-    opacity: 1;
-    z-index: -1;
-}
-
-/* Rótulo que aparece no Hover */
-.yarn-label {
-    position: absolute;
-    left: 70px;
-    background: var(--primary);
-    color: white;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    opacity: 0;
-    transform: translateX(-15px) scale(0.8);
-    transition: var(--transition);
-    white-space: nowrap;
-    pointer-events: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.yarn-label::before {
-    content: '';
-    position: absolute;
-    left: -4px; top: 50%;
-    width: 8px; height: 8px;
-    background: var(--primary);
-    transform: translateY(-50%) rotate(45deg);
-}
-
-/* Hover e Active States */
-.yarn-ball:hover, .yarn-ball.active {
-    background: var(--primary);
-    color: var(--white);
-    transform: scale(1.2);
-    box-shadow: 0 10px 25px rgba(255, 123, 74, 0.4);
-    border-color: var(--primary-light);
-}
-
-.yarn-ball:hover .yarn-label {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-}
-
-.yarn-ball.cta:hover {
-    background: var(--secondary);
-    border-color: #7BE4D8;
-    box-shadow: 0 10px 25px rgba(61, 180, 168, 0.4);
-}
-.yarn-ball.cta .yarn-label { background: var(--secondary); }
-.yarn-ball.cta .yarn-label::before { background: var(--secondary); }
-
-/* ============================================
-   3. MOBILE HEADER (Aparece só em < 900px)
-   ============================================ */
-.mobile-header {
-    display: none;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    height: var(--header-height-mobile);
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    position: fixed;
-    top: 0; left: 0; width: 100%;
-    z-index: 2000;
-    box-shadow: var(--shadow-sm);
-}
-
-.mobile-logo {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 1.6rem;
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-#mobile-toggle {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--dark);
-    cursor: pointer;
-}
-
-/* ============================================
-   4. COMPONENTES E UTILITÁRIOS
-   ============================================ */
+/* ==========================================================================
+   3. COMPONENTES GERAIS (Botões, Cards, Inputs)
+   ========================================================================== */
 .page-content {
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 60px 40px;
 }
 
+/* Botões */
 .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -295,237 +126,7 @@ img { max-width: 100%; height: auto; display: block; }
     transform: translateY(-3px);
 }
 
-/* ============================================
-   5. MENSAGENS FLASH (Alertas)
-   ============================================ */
-.flash-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 3000;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 350px;
-}
-
-.flash-message {
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius-sm);
-    background: var(--white);
-    box-shadow: var(--shadow-lg);
-    border-left: 5px solid var(--primary);
-    font-weight: 500;
-    font-size: 0.9rem;
-    animation: slideIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-
-.flash-message.success { border-left-color: var(--success); }
-.flash-message.error { border-left-color: var(--danger); }
-
-@keyframes slideIn {
-    from { opacity: 0; transform: translateX(100px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-/* ============================================
-   6. HERO SECTION
-   ============================================ */
-.hero {
-    min-height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 40px 8%;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::after {
-    content: '';
-    position: absolute;
-    top: -10%; right: -5%;
-    width: 40vw; height: 40vw;
-    background: radial-gradient(circle, rgba(255,209,102,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    z-index: -1;
-    pointer-events: none;
-}
-
-.hero-content { flex: 1; max-width: 600px; z-index: 2; }
-
-.hero h1 {
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 2.5rem;
-    border-left: 4px solid var(--secondary);
-    padding-left: 1.5rem;
-}
-
-.hero-image { flex: 1; display: flex; justify-content: flex-end; }
-
-.hero-image img {
-    width: 90%;
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    box-shadow: var(--shadow-lg);
-    animation: morphing 10s ease-in-out infinite alternate;
-}
-
-@keyframes morphing {
-    0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-    100% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
-}
-
-/* ============================================
-   7. TIMELINE DE SERVIÇOS (Corrigido para o Menu)
-   ============================================ */
-.yarn-timeline {
-    position: relative;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 0;
-    /* Usando Flex Column para garantir empilhamento correto */
-    display: flex;
-    flex-direction: column;
-}
-
-/* Linha Central */
-.yarn-timeline::before {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0; left: 50%;
-    width: 4px;
-    background: repeating-linear-gradient(to bottom, var(--primary) 0, var(--primary) 10px, transparent 10px, transparent 20px);
-    transform: translateX(-50%);
-    z-index: 0;
-}
-
-/* Item Wrapper (A caixa invisível que ocupa 50% da largura) */
-.timeline-item {
-    width: 50%;
-    position: relative;
-    margin-bottom: 40px;
-    box-sizing: border-box; 
-    z-index: 1;
-}
-
-/* ITENS ÍMPARES (Esquerda) */
-.timeline-item:nth-child(odd) {
-    align-self: flex-start; /* Gruda na esquerda do container pai */
-    padding-right: 50px;    /* Espaço para o conector */
-    text-align: right;
-}
-
-/* ITENS PARES (Direita) */
-.timeline-item:nth-child(even) {
-    align-self: flex-end;   /* Gruda na direita do container pai */
-    padding-left: 50px;     /* Espaço para o conector */
-    text-align: left;
-}
-
-/* O Card em si */
-.yarn-card {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    position: relative;
-    transition: var(--transition);
-    /* Garante que o card ocupe todo o espaço do wrapper de 50% */
-    width: 100%; 
-}
-
-.yarn-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-
-/* Conteúdo do Card */
-.yarn-card h3 { color: var(--primary); margin-bottom: 0.5rem; }
-.yarn-card ul { margin: 1rem 0; color: var(--text-muted); list-style: none; padding: 0; }
-.yarn-card li { margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
-.yarn-card li i { color: var(--secondary); font-size: 0.8rem; }
-
-/* Ajustes de alinhamento interno da lista para itens da esquerda */
-.timeline-item:nth-child(odd) .yarn-card li { justify-content: flex-end; flex-direction: row-reverse; }
-
-/* --- CONECTORES (As linhas e bolinhas laranjas) --- */
-
-/* Conector ÍMPAR (Sai da direita do card p/ esquerda da linha) */
-.timeline-item:nth-child(odd) .yarn-card::after {
-    content: ''; position: absolute; top: 30px; right: -50px; width: 50px; height: 3px; background: var(--primary);
-}
-.timeline-item:nth-child(odd) .yarn-card::before {
-    content: ''; position: absolute; top: 24px; right: -62px; width: 16px; height: 16px; background: var(--primary); border-radius: 50%; border: 3px solid var(--white); box-shadow: 0 0 0 3px var(--primary); z-index: 2;
-}
-
-/* Conector PAR (Sai da esquerda do card p/ direita da linha) */
-.timeline-item:nth-child(even) .yarn-card::after {
-    content: ''; position: absolute; top: 30px; left: -50px; width: 50px; height: 3px; background: var(--primary);
-}
-.timeline-item:nth-child(even) .yarn-card::before {
-    content: ''; position: absolute; top: 24px; left: -62px; width: 16px; height: 16px; background: var(--primary); border-radius: 50%; border: 3px solid var(--white); box-shadow: 0 0 0 3px var(--primary); z-index: 2;
-}
-
-/* Final da Timeline (Gato) */
-.yarn-end {
-    text-align: center;
-    background: var(--light);
-    padding: 20px;
-    position: relative;
-    z-index: 2;
-    align-self: center; /* Centraliza no flex container */
-}
-.yarn-ball-icon { font-size: 3rem; color: var(--primary); animation: bounce 2s infinite; }
-@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-/* ============================================
-   8. OUTRAS PÁGINAS (Sobre, Contato, Footer)
-   ============================================ */
-.split-section {
-    display: flex;
-    gap: 4rem;
-    align-items: center;
-    margin-bottom: 6rem;
-}
-
-.split-image img {
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    box-shadow: var(--shadow-lg);
-}
-
-.services-grid, .team-grid, .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2.5rem;
-    margin-top: 3rem;
-}
-
-.value-card, .team-member, .testimonial-card {
-    background: var(--white);
-    padding: 2.5rem;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    text-align: center;
-    transition: var(--transition);
-}
-
-.contact-container {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 4rem;
-}
-
-.contact-form {
-    background: var(--white);
-    padding: 3rem;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-}
-
+/* Formulários (Global) */
 .form-group { margin-bottom: 1.5rem; }
 
 label {
@@ -554,7 +155,206 @@ input:focus, select:focus, textarea:focus {
 
 textarea { resize: vertical; min-height: 120px; }
 
-/* Footer */
+/* Grid de Serviços (Usado na Home e Sobre) */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.service-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: var(--transition);
+}
+
+/* ==========================================================================
+   4. LAYOUT: SIDEBAR & HEADER
+   ========================================================================== */
+.yarn-sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--white);
+    box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    z-index: 1000;
+    border-right: 1px solid rgba(0,0,0,0.02);
+}
+
+.sidebar-logo {
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin-bottom: 3rem;
+    filter: drop-shadow(0 4px 6px rgba(255, 123, 74, 0.3));
+    transition: var(--transition);
+}
+
+.sidebar-logo:hover { transform: scale(1.1) rotate(-10deg); }
+
+.yarn-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    position: relative;
+    width: 100%;
+}
+
+.yarn-string {
+    position: absolute;
+    top: 0; bottom: 0; left: 50%;
+    width: 3px;
+    background: #E0E0E0;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px);
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+.yarn-ball {
+    position: relative;
+    width: 55px; height: 55px;
+    border-radius: 50%;
+    background: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    z-index: 1;
+    transition: var(--transition);
+    border: 3px solid var(--white);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.ball-texture {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    border-radius: 50%;
+    background: repeating-linear-gradient(45deg, rgba(0,0,0,0.03), rgba(0,0,0,0.03) 2px, transparent 2px, transparent 4px);
+    opacity: 1;
+    z-index: -1;
+}
+
+.yarn-label {
+    position: absolute;
+    left: 70px;
+    background: var(--primary);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateX(-15px) scale(0.8);
+    transition: var(--transition);
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.yarn-label::before {
+    content: '';
+    position: absolute;
+    left: -4px; top: 50%;
+    width: 8px; height: 8px;
+    background: var(--primary);
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.yarn-ball:hover, .yarn-ball.active {
+    background: var(--primary);
+    color: var(--white);
+    transform: scale(1.2);
+    box-shadow: 0 10px 25px rgba(255, 123, 74, 0.4);
+    border-color: var(--primary-light);
+}
+
+.yarn-ball:hover .yarn-label {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.yarn-ball.cta:hover {
+    background: var(--secondary);
+    border-color: #7BE4D8;
+    box-shadow: 0 10px 25px rgba(61, 180, 168, 0.4);
+}
+.yarn-ball.cta .yarn-label, .yarn-ball.cta .yarn-label::before { background: var(--secondary); }
+
+/* Header Mobile */
+.mobile-header {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: var(--header-height-mobile);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    z-index: 2000;
+    box-shadow: var(--shadow-sm);
+}
+
+.mobile-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#mobile-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--dark);
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   5. FLASH MESSAGES & FOOTER
+   ========================================================================== */
+.flash-container {
+    position: fixed;
+    top: 20px; right: 20px;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+}
+
+.flash-message {
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    box-shadow: var(--shadow-lg);
+    border-left: 5px solid var(--primary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    animation: slideIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.flash-message.success { border-left-color: var(--success); }
+.flash-message.error { border-left-color: var(--danger); }
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
 footer {
     background: var(--dark);
     color: white;
@@ -571,7 +371,13 @@ footer {
     margin: 0 auto;
 }
 
-.footer-section h3 { color: var(--white); border-bottom: 3px solid var(--primary); display: inline-block; padding-bottom: 5px; }
+.footer-section h3 {
+    color: var(--white);
+    border-bottom: 3px solid var(--primary);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
 .footer-links li { margin-bottom: 10px; }
 .footer-links a:hover { color: var(--primary); padding-left: 5px; }
 
@@ -586,84 +392,22 @@ footer {
     color: #888;
 }
 
-.marquee-container {
-    background: var(--primary);
-    color: var(--white);
-    padding: 1rem 0;
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%) rotate(-1deg);
-    overflow: hidden;
-    white-space: nowrap;
-    box-shadow: var(--shadow-md);
-    z-index: 10;
-    margin: 2rem 0;
-}
-
-.marquee-content span {
-    display: inline-block;
-    padding-left: 100%;
-    animation: scroll 25s linear infinite;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-@keyframes scroll { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-
-/* ============================================
-   9. RESPONSIVIDADE (Mobile)
-   ============================================ */
-@media (max-width: 900px) {
-    /* Ajuste Geral */
-    body { padding-left: 0; padding-top: var(--header-height-mobile); }
-    
-    /* Esconder Sidebar Desktop */
-    .yarn-sidebar { display: none; }
-    
-    /* Mostrar Header Mobile */
-    .mobile-header { display: flex; }
-
-    /* Timeline Mobile */
-    .yarn-timeline::before { left: 20px; } /* Linha move para a esquerda */
-    
-    /* Zera a estrutura de esquerda/direita e alinha tudo à esquerda */
-    .timeline-item, 
-    .timeline-item:nth-child(odd), 
-    .timeline-item:nth-child(even) {
-        width: 100%;
-        align-self: flex-start;
-        text-align: left;
-        padding: 0 0 0 50px; /* Espaço para linha na esquerda */
-        margin-bottom: 40px;
-    }
-
-    /* Reseta alinhamento dos itens da lista */
-    .timeline-item:nth-child(odd) .yarn-card li { justify-content: flex-start; flex-direction: row; }
-
-    /* Ajuste dos Conectores para ficarem todos na esquerda */
-    .timeline-item:nth-child(odd) .yarn-card::after, 
-    .timeline-item:nth-child(even) .yarn-card::after {
-        left: -30px; right: auto; width: 30px;
-    }
-    .timeline-item:nth-child(odd) .yarn-card::before, 
-    .timeline-item:nth-child(even) .yarn-card::before {
-        left: -38px; right: auto;
-    }
-
-    /* Outros Ajustes Mobile */
-    .hero { flex-direction: column; text-align: center; padding-top: 2rem; }
-    .split-section { flex-direction: column-reverse; }
-    .contact-container { grid-template-columns: 1fr; }
-    .flash-container { top: 80px; left: 20px; width: auto; }
-}
-
-/* Utilitário de Animação */
+/* ==========================================================================
+   6. UTILITÁRIOS E RESPONSIVIDADE GLOBAL
+   ========================================================================== */
 .reveal {
     animation: fadeInUp 0.8s ease-out forwards;
     opacity: 0;
 }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+    body { padding-left: 0; padding-top: var(--header-height-mobile); }
+    .yarn-sidebar { display: none; }
+    .mobile-header { display: flex; }
+    .flash-container { top: 80px; left: 20px; width: auto; }
+}

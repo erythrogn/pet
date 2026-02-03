@@ -1,0 +1,297 @@
+/* =================================================================
+   CONTATO - ESTILO "CADERNO E PATA" (PAWPARADISE)
+   ================================================================= */
+
+/* Container Principal */
+.contact-section {
+    padding: 4rem 5% 6rem;
+    background-color: #FAFAFA;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+/* ===== 1. FORMULÁRIO ESTILO "CADERNO" ===== */
+.contact-form {
+    position: relative;
+    z-index: 1;
+    
+    /* Papel Pautado (Creme com linhas azuis) */
+    background-color: #FFFDF7; 
+    background-image: linear-gradient(#dbeafe 1px, transparent 1px);
+    background-size: 100% 2.2rem; /* Altura da linha */
+    background-attachment: local;
+    
+    /* Formato do Papel */
+    padding: 3.5rem 3rem 4rem;
+    border-radius: 20px 20px 50px 50px;
+    
+    /* Bordas e Sombras realistas */
+    border: 1px solid rgba(0,0,0,0.08);
+    border-top: none; 
+    box-shadow: 
+        0 15px 35px rgba(0,0,0,0.08), 
+        0 5px 15px rgba(0,0,0,0.05);
+        
+    transition: all 0.4s ease;
+    margin-top: 50px; /* Espaço para o espiral/abas no topo */
+}
+
+.contact-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 20px 40px rgba(61, 180, 168, 0.15),
+        0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* Título centralizado nas linhas */
+.contact-form h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== 2. DECORAÇÃO DO TOPO (ESPIRAL/ABAS) ===== */
+.contact-form::before {
+    content: '';
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 40px;
+    z-index: -1;
+    
+    /* Desenha as "abas" ou furos do caderno */
+    background-image: 
+        radial-gradient(circle at 12% 50%, #FFFDF7 28px, transparent 29px),
+        radial-gradient(circle at 37% 30%, #FFFDF7 32px, transparent 33px),
+        radial-gradient(circle at 63% 30%, #FFFDF7 32px, transparent 33px),
+        radial-gradient(circle at 88% 50%, #FFFDF7 28px, transparent 29px);
+        
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 -4px 3px rgba(0,0,0,0.05));
+}
+
+/* ===== 3. INPUTS (COM VISUAL DE ADESIVO) ===== */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    
+    /* Fundo branco sólido para contrastar com o papel creme */
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: var(--dark);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 4px 10px rgba(61, 180, 168, 0.15);
+    transform: scale(1.01);
+    outline: none;
+}
+
+/* ===== 4. BOTÃO DE PATA (CORRIGIDO E REALISTA) ===== */
+.btn-paw-submit {
+    /* Posição e Layout */
+    position: relative;
+    width: 100%;
+    padding: 1.8rem 1rem 1.2rem; /* Mais espaço no topo para o formato */
+    margin-top: 50px; /* Importante: espaço para os dedos não cobrirem o input */
+    
+    /* Estilo Visual */
+    background-color: var(--primary); /* Laranja */
+    color: var(--white);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    
+    /* O FORMATO DA ALMOFADA PRINCIPAL (CORAÇÃO INVERTIDO / TRIÂNGULO ARREDONDADO) */
+    /* Isso cria a base larga e o topo levemente curvado da pata */
+    border-radius: 40% 40% 45% 45% / 60% 60% 35% 35%;
+    
+    /* Sombras para volume 3D */
+    box-shadow: 
+        0 8px 0 var(--primary-dark), /* Lateral grossa */
+        0 15px 25px rgba(255, 123, 74, 0.3); /* Sombra difusa */
+        
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* OS 4 DEDOS (FEITOS COM BOX-SHADOW PARA FICAR PERFEITO) */
+.btn-paw-submit::before {
+    content: '';
+    position: absolute;
+    top: -35px; /* Sobe os dedos para fora do botão */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Tamanho base de um dedo */
+    width: 35px; 
+    height: 45px; /* Levemente oval na vertical */
+    border-radius: 50%;
+    background: transparent; /* Invisível, usaremos apenas a sombra */
+    
+    /* COORDENADAS DOS DEDOS (X Y BLUR COR) 
+       Ajustado para formar o arco perfeito da imagem de referência
+    */
+    box-shadow: 
+        -55px 25px 0 var(--primary),  /* Dedo Externo Esquerdo (Mais baixo) */
+        -18px 0px 0 var(--primary),   /* Dedo Interno Esquerdo (Mais alto) */
+         18px 0px 0 var(--primary),   /* Dedo Interno Direito (Mais alto) */
+         55px 25px 0 var(--primary);  /* Dedo Externo Direito (Mais baixo) */
+         
+    transition: all 0.2s ease;
+    z-index: -1; /* Fica atrás da almofada principal para não tapar texto */
+}
+
+/* EFEITO HOVER (PATA SENDO PRESSIONADA) */
+.btn-paw-submit:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(6px); /* Botão desce */
+    box-shadow: 
+        0 2px 0 var(--primary-dark), /* Sombra sólida diminui */
+        0 8px 15px rgba(0,0,0,0.2);
+}
+
+.btn-paw-submit:hover::before {
+    top: -29px; /* Dedos descem junto */
+    /* Muda a cor dos dedos */
+    box-shadow: 
+        -55px 25px 0 var(--primary-dark),
+        -18px 0px 0 var(--primary-dark),
+         18px 0px 0 var(--primary-dark),
+         55px 25px 0 var(--primary-dark);
+}
+
+/* ===== 5. INFORMAÇÕES LATERAIS (CARDS) ===== */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Card Escuro de Horários */
+.info-card {
+    background: var(--dark);
+    color: white;
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+.info-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+.info-card li {
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-card li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* Cards de Canais Diretos (WhatsApp, Email, etc) */
+.service-details-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.service-detail-card {
+    background: var(--white);
+    padding: 1.5rem;
+    /* Formato orgânico (folha/gota) */
+    border-radius: 20px 50px 20px 50px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.service-detail-card:hover {
+    transform: translateX(-5px);
+    border-color: var(--secondary);
+    box-shadow: var(--shadow-md);
+    /* Inverte formato no hover */
+    border-radius: 50px 20px 50px 20px;
+}
+
+.service-icon {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(61, 180, 168, 0.1);
+    color: var(--secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.service-detail-card:hover .service-icon {
+    background-color: var(--secondary);
+    color: var(--white);
+    transform: rotate(-10deg) scale(1.1);
+    /* Ícone vira formato de pata no hover */
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 900px) {
+    .contact-container { 
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .contact-form {
+        padding: 2.5rem 1.5rem 3rem;
+        margin-top: 30px;
+    }
+    /* Ajuste da pata no mobile para não quebrar */
+    .btn-paw-submit {
+        padding: 1.5rem 1rem 1rem;
+    }
+}

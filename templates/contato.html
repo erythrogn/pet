@@ -1,77 +1,116 @@
 {% extends "base.html" %}
 
-{% block title %}Contato - PawParadise{% endblock %}
+{% block title %}Fale Conosco - PawParadise{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contato.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
 
 {% block content %}
 <div class="page-content">
-    <h1>Entre em Contato</h1>
-    <p>Estamos prontos para atender você e seu pet! Preencha o formulário abaixo ou entre em contato através de nossos canais.</p>
-
-    <div class="contact-form">
-        <form action="{{ url_for('contato') }}" method="POST">
-            <div class="form-group">
-                <label for="nome">Seu Nome *</label>
-                <input type="text" id="nome" name="nome" required>
-            </div>
-
-            <div class="form-group">
-                <label for="email">E-mail *</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="telefone">Telefone *</label>
-                <input type="tel" id="telefone" name="telefone" required>
-            </div>
-
-            <div class="form-group">
-                <label for="pet">Nome do Pet</label>
-                <input type="text" id="pet" name="pet">
-            </div>
-
-            <div class="form-group">
-                <label for="servico">Serviço de Interesse</label>
-                <select id="servico" name="servico">
-                    <option value="">Selecione um serviço</option>
-                    {% for servico in servicos %}
-                    <option value="{{ servico.slug }}">{{ servico.nome }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="mensagem">Mensagem *</label>
-                <textarea id="mensagem" name="mensagem" required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
-        </form>
+    <div class="contact-header" style="text-align: center; margin-bottom: 3rem;">
+        <h1>Estamos aqui por você</h1>
+        <p>Atendimento 24h para emergências e horário comercial para agendamentos.</p>
     </div>
 
-    <h2 class="text-center mt-4">Outras Formas de Contato</h2>
-    
-    <div class="service-details-grid mt-2">
-        {% for contato in contatos %}
-        <div class="service-detail-card text-center">
-            <div class="service-icon">{{ contato.emoji }}</div>
-            <h3>{{ contato.tipo }}</h3>
-            <p>{{ contato.valor|safe }}</p>
-            {% if contato.horario %}
-            <p>{{ contato.horario|safe }}</p>
-            {% endif %}
+    <div class="contact-container">
+        <div class="contact-form">
+            <h3>Envie uma mensagem</h3>
+            <form action="{{ url_for('contato') }}" method="POST">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label for="nome">Seu Nome *</label>
+                        <input type="text" id="nome" name="nome" placeholder="Ex: Maria Silva" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">WhatsApp/Celular *</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail Corporativo/Pessoal *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label for="pet">Nome do Paciente/Pet</label>
+                        <input type="text" id="pet" name="pet" placeholder="Ex: Rex">
+                    </div>
+                    <div class="form-group">
+                        <label for="servico">Interesse</label>
+                        <select id="servico" name="servico">
+                            <option value="">Selecione...</option>
+                            {% for servico in servicos %}
+                            <option value="{{ servico.slug }}">{{ servico.nome }}</option>
+                            {% endfor %}
+                            <option value="outros">Outros Assuntos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensagem">Como podemos ajudar? *</label>
+                    <textarea id="mensagem" name="mensagem" placeholder="Descreva os sintomas ou dúvidas..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-paw-submit">Enviar Solicitação</button>
+            </form>
         </div>
-        {% endfor %}
+
+        <div class="contact-info">
+            <div class="info-card" style="background: var(--dark); color: white; padding: 2rem; border-radius: var(--radius-md); margin-bottom: 2rem; box-shadow: var(--shadow-md);">
+                <h3><i class="fas fa-clock"></i> Horários</h3>
+                <ul style="list-style: none; margin-top: 1rem; line-height: 1.8;">
+                    <li><strong>Emergência:</strong> 24h / 7 dias</li>
+                    <li><strong>Clínica:</strong> Seg-Sex: 8h às 20h</li>
+                    <li><strong>Sábados:</strong> 8h às 18h</li>
+                    <li><strong>Domingos:</strong> Plantão</li>
+                </ul>
+            </div>
+
+            <h3 style="margin-bottom: 1.5rem;">Canais Diretos</h3>
+            
+            <div class="service-details-grid">
+                <div class="service-detail-card">
+                    <div class="service-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h4>WhatsApp</h4>
+                        <p>(11) 99999-9999</p>
+                    </div>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h4>Email</h4>
+                        <p>contato@pawparadise.com</p>
+                    </div>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h4>Endereço</h4>
+                        <p>Av. Paulista, 1000 - SP</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <h2 class="text-center mt-4">Horário de Atendimento</h2>
-    <div class="cta-section">
-        <div style="background: var(--bg-white); padding: var(--spacing-lg); border-radius: var(--border-radius-md);">
-            <p style="font-size: 1.2rem; margin-bottom: 1.5rem;">
-                <strong>Segunda a Sexta:</strong> 8h às 20h<br>
-                <strong>Sábados:</strong> 8h às 18h<br>
-                <strong>Domingos:</strong> 9h às 14h
-            </p>
-            <p><strong>Emergências veterinárias:</strong> Atendimento 24h</p>
+    <div style="margin-top: 6rem;">
+        <h2 style="text-align: center; margin-bottom: 2rem; font-family: 'Barlow Condensed', sans-serif;">Nossa Localização</h2>
+        <div style="width: 100%; height: 450px; background: #eee; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md);">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.197587029583!2d-46.6520!3d-23.5629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDMzJzQ2LjUiUyA0NsKwMzknMDcuMiJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </div>
 </div>

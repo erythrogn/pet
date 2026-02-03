@@ -2,69 +2,125 @@
 
 {% block title %}PawParadise - Onde Seu Pet é Realeza{% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
 {% block content %}
 
 <section class="hero">
     <div class="hero-content">
-        <span class="reveal" style="color: var(--secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 10px;">Cuidado Premium</span>
-        <h1 class="reveal">Onde Seu Pet é <br>Tratado como Rei</h1>
-        <p class="reveal">Proporcione ao seu melhor amigo uma experiência de bem-estar completa. Hotelaria, estética e saúde com monitoramento 24 horas.</p>
+        <span class="reveal">Cuidado Premium</span>
         
-        <div class="cta-wrapper reveal" style="margin-top: 2rem;">
-            <a href="{{ url_for('contato') }}" class="btn-neon">Agendar Visita <i class="fas fa-arrow-right"></i></a>
+        <h1 class="reveal">
+            Onde Seu Pet é <br><em>Tratado como Rei</em>
+        </h1>
+        
+        <p class="reveal">
+            Proporcione ao seu melhor amigo uma experiência de bem-estar completa. 
+            Hotelaria, estética e saúde com monitoramento 24 horas por especialistas.
+        </p>
+        
+        <div class="cta-wrapper reveal">
+            <a href="{{ url_for('contato') }}" class="btn-primary">
+                Agendar Visita <i class="fas fa-arrow-right" style="margin-left: 10px; font-size: 0.8em;"></i>
+            </a>
+            <a href="{{ url_for('servicos') }}" class="btn-neon">
+                Conhecer Serviços
+            </a>
         </div>
     </div>
-    <div class="hero-image reveal">
-        <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Cachorro Feliz">
-    </div>
+    
+  <div class="hero-image reveal">
+     <div class="paws-transformation">
+        <!-- Patas animadas (fundo) -->
+        <div class="paw paw-dog"></div>
+        <div class="paw paw-cat"></div>
+        <div class="paw paw-rabbit"></div>
+        <div class="paw paw-bird"></div>
+        
+        <!-- Foto do cachorro (sobreposta) -->
+        <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+             alt="Bulldog Francês" 
+             class="dog-photo">
+</div>
 </section>
 
-<div class="marquee-container">
-    <div class="marquee-content">
-        <span>
-            BANHO & TOSA &nbsp;•&nbsp; HOTEL 5 ESTRELAS &nbsp;•&nbsp; VETERINÁRIO 24H &nbsp;•&nbsp; DAY CARE &nbsp;•&nbsp; SPA PET &nbsp;•&nbsp; 
-            BANHO & TOSA &nbsp;•&nbsp; HOTEL 5 ESTRELAS &nbsp;•&nbsp; VETERINÁRIO 24H &nbsp;•&nbsp; DAY CARE &nbsp;•&nbsp; SPA PET &nbsp;•&nbsp;
-        </span>
+<div class="trust-bar">
+    <div class="page-content" style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; text-align: center;">
+        <div class="trust-item reveal">
+            <h3>+10.000</h3>
+            <p>Vidas Salvas</p>
+        </div>
+        <div class="trust-item reveal">
+            <h3>24/7</h3>
+            <p>Monitoramento</p>
+        </div>
+        <div class="trust-item reveal">
+            <h3>15+</h3>
+            <p>Especialistas</p>
+        </div>
     </div>
 </div>
 
 <section id="servicos" class="page-content">
     <div style="text-align: center; margin-bottom: 4rem;">
-        <h2 class="reveal">Tudo em um só lugar</h2>
-        <p class="reveal">Serviços pensados para a felicidade do seu pet e sua tranquilidade.</p>
+        <span class="section-subtitle reveal">Nossas Especialidades</span>
+        <h2 class="reveal" style="font-size: 2.5rem; color: var(--dark);">Tudo em um só lugar</h2>
+        <p class="reveal" style="max-width: 600px; margin: 1rem auto 0; color: var(--text-muted);">
+            Serviços integrados para a saúde e felicidade do seu pet.
+        </p>
     </div>
     
     <div class="services-grid">
         {% for servico in servicos %}
         <div class="service-card reveal">
-            <div style="font-size: 3.5rem; margin-bottom: 1.5rem;">{{ servico.emoji }}</div>
-            <h3>{{ servico.nome }}</h3>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">{{ servico.descricao }}</p>
-            <a href="{{ url_for('servicos') }}" style="color: var(--primary); font-weight: 700; font-size: 0.9rem;">SAIBA MAIS <i class="fas fa-chevron-right"></i></a>
-        </div>
-        {% endfor %}
-    </div>
-</section>
-
-<section id="depoimentos" class="page-content" style="background: #fff; border-radius: 30px; margin-bottom: 4rem;">
-    <h2 class="reveal" style="text-align: center;">O Que Dizem Nossos Clientes</h2>
-    <div class="testimonials-grid">
-        {% for depoimento in depoimentos %}
-        <div class="testimonial-card reveal">
-            <div style="color: var(--accent); margin-bottom: 1rem;">
-                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <div class="card-icon">
+                {% if 'Banho' in servico.nome %}<i class="fas fa-bath"></i>{% endif %}
+                {% if 'Hotel' in servico.nome %}<i class="fas fa-bed"></i>{% endif %}
+                {% if 'Veterinária' in servico.nome %}<i class="fas fa-stethoscope"></i>{% endif %}
+                {% if 'Day' in servico.nome %}<i class="fas fa-sun"></i>{% endif %}
+                {% if 'Taxi' in servico.nome %}<i class="fas fa-car"></i>{% endif %}
+                {% if 'Adestramento' in servico.nome %}<i class="fas fa-graduation-cap"></i>{% endif %}
             </div>
-            <p style="font-style: italic; margin-bottom: 1.5rem;">"{{ depoimento.texto }}"</p>
-            <p style="font-weight: 700; color: var(--primary);">— {{ depoimento.autor }}</p>
+            
+            <h3>{{ servico.nome }}</h3>
+            <p>{{ servico.descricao }}</p>
+            
+            <a href="{{ url_for('servicos') }}">
+                Saiba Mais <i class="fas fa-chevron-right"></i>
+            </a>
         </div>
         {% endfor %}
     </div>
 </section>
 
-<section class="reveal" style="text-align: center; padding: 4rem 0;">
-    <h2>Pronto para surpreender seu pet?</h2>
-    <p style="margin-bottom: 2rem;">Entre em contato hoje mesmo e conheça nossa estrutura.</p>
-    <a href="{{ url_for('contato') }}" class="btn-primary">Fale Conosco Agora</a>
+<section id="depoimentos" class="page-content">
+    <div class="testimonials-wrapper">
+        <h2 class="reveal" style="text-align: center; margin-bottom: 4rem; font-size: 2rem;">Histórias Reais</h2>
+        
+        <div class="testimonials-grid">
+            {% for depoimento in depoimentos %}
+            <div class="testimonial-card reveal">
+                <p>"{{ depoimento.texto }}"</p>
+                <div class="author-info">
+                    <strong>{{ depoimento.autor }}</strong>
+                    <span>Tutor Verificado</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="reveal final-cta">
+    <div class="cta-content">
+        <h2>Seu pet merece o melhor cuidado</h2>
+        <p>Agende uma visita técnica e conheça nossa infraestrutura hospitalar.</p>
+        <a href="{{ url_for('contato') }}" class="btn-primary" style="background: white; color: var(--primary);">
+            Falar com Atendente
+        </a>
+    </div>
 </section>
 
 {% endblock %}

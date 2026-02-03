@@ -1,63 +1,184 @@
 {% extends "base.html" %}
 
-{% block title %}Nossos Serviços - PawParadise{% endblock %}
+{% block title %}Especialidades & Serviços - PawParadise{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/servicos.css') }}">
+{% endblock %}
 
 {% block content %}
 <div class="page-content">
     
+    <!-- ===== CABEÇALHO DA PÁGINA ===== -->
     <div style="text-align: center; margin-bottom: 5rem; position: relative;">
-        <span class="reveal" style="font-size: 3rem; display: block; margin-bottom: 0.5rem;">🧶</span>
-        <h1 class="reveal">Menu de Cuidados</h1>
-        <p class="reveal" style="max-width: 600px; margin: 0 auto; color: var(--text-muted);">
-            Siga o fio da nossa dedicação. Cada nó representa um momento de carinho e profissionalismo com seu pet.
+        <span class="reveal" style="font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; color: var(--secondary); font-weight: 700; display: block; margin-bottom: 10px;">
+            Portfólio Completo
+        </span>
+        <h1 class="reveal" style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--dark);">
+            Nossas Especialidades
+        </h1>
+        <p class="reveal" style="max-width: 600px; margin: 0 auto; color: var(--text-muted); font-size: 1.1rem; line-height: 1.6;">
+            Protocolos internacionais de medicina veterinária e bem-estar animal.
         </p>
     </div>
 
+    <!-- ===== TIMELINE DE SERVIÇOS ===== -->
     <div class="yarn-timeline">
         
         {% for servico in servicos %}
-        <div class="timeline-item reveal">
-            <div class="yarn-knot"></div>
+        <div class="timeline-item">
             
+            <!-- Card do Serviço -->
             <div class="yarn-card">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">{{ servico.emoji }}</div>
-                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">{{ servico.nome }}</h3>
-                <p style="margin-bottom: 1.5rem; font-size: 0.95rem;">{{ servico.descricao }}</p>
                 
-                <ul style="margin-bottom: 1.5rem; color: var(--text-muted); list-style: none; padding: 0;">
-                    {% for item in servico.itens %}
-                    <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;">
-                        <i class="fas fa-paw" style="color: var(--secondary); font-size: 0.8rem;"></i> 
-                        {{ item }}
-                    </li>
-                    {% endfor %}
-                </ul>
+                <!-- Cabeçalho do Card -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                    <div style="font-size: 3rem; line-height: 1;">
+                        {{ servico.emoji }}
+                    </div>
+                    <span style="background: linear-gradient(135deg, #FFE5E5 0%, #FFF5E5 100%); padding: 6px 14px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; color: var(--primary); letter-spacing: 1px;">
+                        PREMIUM
+                    </span>
+                </div>
                 
-                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 1rem;">
-                    <span style="font-weight: 800; font-size: 1.3rem; color: var(--dark);">{{ servico.preco }}</span>
-                    <a href="{{ url_for('contato') }}" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.85rem; border-radius: 20px;">
-                        Reservar
+                <!-- Título e Descrição -->
+                <h3>{{ servico.nome }}</h3>
+                <p style="margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.7; color: var(--text-body);">
+                    {{ servico.descricao }}
+                </p>
+                
+                <!-- Box de Itens Inclusos -->
+                <div style="background: linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 100%); padding: 18px; border-radius: 10px; margin-bottom: 1.5rem; border-left: 3px solid var(--primary);">
+                    <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--dark); margin-bottom: 12px; font-weight: 700; letter-spacing: 0.5px;">
+                        <i class="fas fa-clipboard-check" style="color: var(--primary); margin-right: 8px;"></i>
+                        O que inclui:
+                    </h4>
+                    <ul>
+                        {% for item in servico.itens %}
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>{{ item }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <!-- Rodapé com Preço e CTA -->
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #F0F0F0; padding-top: 1.2rem; gap: 1rem; flex-wrap: wrap;">
+                    <div>
+                        <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">
+                            Investimento
+                        </span>
+                        <span style="font-weight: 800; font-size: 1.5rem; color: var(--primary); background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            {{ servico.preco }}
+                        </span>
+                    </div>
+                    <a href="{{ url_for('contato') }}" class="btn-primary" style="padding: 0.75rem 1.8rem; font-size: 0.9rem; border-radius: 25px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255, 87, 87, 0.2);">
+                        <i class="fas fa-calendar-check"></i>
+                        Agendar Procedimento
                     </a>
                 </div>
             </div>
+            
         </div>
         {% endfor %}
 
-        <div class="yarn-end reveal">
+        <!-- ===== FIM DA TIMELINE ===== -->
+        <div class="yarn-end">
             <div class="yarn-ball-icon">
-                <i class="fas fa-cat"></i>
+                <i class="fas fa-heartbeat"></i>
             </div>
-            <p style="margin-top: 10px; font-weight: 600; color: var(--primary);">Seu pet em boas mãos!</p>
+            <p style="margin-top: 15px; font-weight: 600; color: var(--dark); font-size: 1.1rem;">
+                Saúde é nossa prioridade.
+            </p>
+            <p style="margin-top: 8px; font-size: 0.85rem; color: var(--text-muted);">
+                Atendimento 24/7 disponível
+            </p>
         </div>
 
     </div>
-</div>
+    
+    <!-- ===== SEÇÃO DE FAQ ===== -->
+    <div class="reveal" style="max-width: 800px; margin: 5rem auto 0; padding: 0 20px;">
+        <h2 style="text-align: center; margin-bottom: 2.5rem; font-size: 2rem; color: var(--dark);">
+            <i class="fas fa-question-circle" style="color: var(--primary); margin-right: 10px;"></i>
+            Dúvidas Frequentes
+        </h2>
+        
+        <details>
+            <summary>
+                <i class="fas fa-calendar-alt" style="margin-right: 10px; color: var(--primary);"></i>
+                É necessário agendar consultas?
+            </summary>
+            <p>
+                Para consultas de rotina, sim. Recomendamos agendamento prévio para garantir o melhor atendimento. 
+                No entanto, nosso pronto-socorro funciona 24 horas por dia, 7 dias por semana, atendendo por ordem de gravidade.
+            </p>
+        </details>
+        
+        <details>
+            <summary>
+                <i class="fas fa-syringe" style="margin-right: 10px; color: var(--primary);"></i>
+                Quais vacinas são obrigatórias para o Hotel?
+            </summary>
+            <p>
+                Para a segurança de todos os pets, exigimos: V8/V10 (polivalente), Raiva, Gripe Canina (Tosse dos Canis) 
+                e Giárdia. A carteirinha de vacinação deve estar completamente atualizada com no mínimo 15 dias de antecedência.
+            </p>
+        </details>
+        
+        <details>
+            <summary>
+                <i class="fas fa-clock" style="margin-right: 10px; color: var(--primary);"></i>
+                Qual o horário de funcionamento?
+            </summary>
+            <p>
+                Nosso pronto-socorro funciona 24h. Para serviços de rotina, banho e tosa, funcionamos de segunda a sábado, 
+                das 8h às 19h. Check-in e check-out do hotel: segunda a sábado, 8h às 18h.
+            </p>
+        </details>
+        
+        <details>
+            <summary>
+                <i class="fas fa-credit-card" style="margin-right: 10px; color: var(--primary);"></i>
+                Quais formas de pagamento são aceitas?
+            </summary>
+            <p>
+                Aceitamos dinheiro, cartões de débito e crédito (todas as bandeiras), PIX e parcelamento em até 12x 
+                para procedimentos veterinários. Para o hotel, solicitamos pagamento antecipado.
+            </p>
+        </details>
+        
+        <details>
+            <summary>
+                <i class="fas fa-user-md" style="margin-right: 10px; color: var(--primary);"></i>
+                Os veterinários são especializados?
+            </summary>
+            <p>
+                Sim! Nossa equipe conta com médicos veterinários especializados em diversas áreas: cirurgia, 
+                dermatologia, cardiologia, ortopedia, oftalmologia e medicina felina. Todos com certificação 
+                reconhecida pelo CRMV.
+            </p>
+        </details>
+    </div>
+    
+    <!-- ===== CTA FINAL ===== -->
+    <div class="reveal" style="text-align: center; margin: 5rem auto 3rem; max-width: 600px; padding: 3rem 2rem; background: linear-gradient(135deg, #FFF5F5 0%, #FFF9E5 100%); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+        <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.8rem;">
+            Pronto para cuidar do seu pet?
+        </h3>
+        <p style="color: var(--text-body); margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.6;">
+            Entre em contato conosco e agende uma avaliação gratuita. Nossa equipe está pronta para atender você e seu melhor amigo.
+        </p>
+        <a href="{{ url_for('contato') }}" class="btn-primary" style="padding: 1rem 2.5rem; font-size: 1rem; border-radius: 30px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 6px 20px rgba(255, 87, 87, 0.3);">
+            <i class="fas fa-phone-alt"></i>
+            Fale Conosco Agora
+        </a>
+    </div>
 
-<style>
-    .yarn-timeline::after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-</style>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 {% endblock %}

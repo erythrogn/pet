@@ -1,0 +1,407 @@
+/* =================================================================
+   HOME PAGE - MINIMALISTA & CORPORATIVA (INTEGRADA)
+   ================================================================= */
+
+/* ===== 1. HERO SECTION (CLEAN) ===== */
+.hero {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem 5% 5rem;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--white); /* Garante fundo limpo */
+}
+
+/* Elemento Geométrico Sutil (Substitui as partículas de patas) */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -15%;
+    right: -10%;
+    width: 60%;
+    height: 140%;
+    background: radial-gradient(circle, rgba(61, 180, 168, 0.04) 0%, transparent 60%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+    z-index: 2;
+    padding-right: 2rem;
+}
+
+/* Badge Profissional (Pílula) */
+.hero-content span {
+    display: inline-block;
+    background-color: rgba(61, 180, 168, 0.1);
+    color: var(--secondary-dark);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    border: 1px solid rgba(61, 180, 168, 0.2);
+}
+
+.hero h1 {
+    font-size: clamp(3rem, 5vw, 4.8rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+}
+
+.hero h1 em {
+    color: var(--primary);
+    font-style: normal;
+    position: relative;
+    white-space: nowrap;
+}
+
+/* Sublinhado estilizado (Swoosh) */
+.hero h1 em::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background-color: rgba(255, 123, 74, 0.15);
+    z-index: -1;
+    transform: skewX(-15deg);
+    border-radius: 4px;
+}
+
+.hero p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-body);
+    margin-bottom: 2.5rem;
+    max-width: 90%;
+    line-height: 1.7;
+}
+
+/* Wrapper dos Botões */
+.cta-wrapper {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* ===== 2. HERO IMAGE (MODERNA EM ARCO) ===== */
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 480px;
+    height: 550px;
+    object-fit: cover;
+    /* Formato de Arco - Tendência de Design Clean */
+    border-radius: 250px 250px 20px 20px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    z-index: 2;
+}
+
+/* Moldura Decorativa (Outline) */
+.hero-image::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: -20px; /* Deslocado para a direita */
+    width: 100%;
+    max-width: 480px;
+    height: 550px;
+    border: 2px solid var(--primary);
+    border-radius: 250px 250px 20px 20px;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+/* ===== 3. LOGO GRID (PARCEIROS) ===== */
+/* Esta seção substitui a antiga barra colorida por algo mais corporativo */
+.trust-bar {
+    padding: 4rem 5%;
+    background-color: var(--white);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    margin-top: 0;
+}
+
+.trust-title {
+    text-align: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2.5rem;
+    font-weight: 600;
+}
+
+.logos-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px 60px; /* Gap vertical / horizontal */
+}
+
+.logo-item img {
+    height: 35px; /* Altura fixa para manter alinhamento */
+    width: auto;
+    /* Efeito Profissional: Preto e Branco por padrão */
+    filter: grayscale(100%);
+    opacity: 0.5;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.logo-item img:hover {
+    /* Cor original e opacidade total no hover */
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* ===== 4. SEÇÃO DE SERVIÇOS (CARDS CLEAN) ===== */
+.home-services {
+    padding: 6rem 5%;
+    background-color: #FAFAFA; /* Fundo cinza muito leve */
+}
+
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3.5rem;
+}
+
+.section-header h2 {
+    color: var(--dark);
+    font-size: 2.5rem;
+}
+
+.section-header p {
+    color: var(--text-body);
+}
+
+/* Cards simplificados (sem sombras pesadas) */
+.service-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(0,0,0,0.05); /* Borda sutil em vez de sombra */
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--secondary);
+    box-shadow: var(--shadow-md);
+}
+
+.service-card i {
+    font-size: 2.5rem;
+    color: var(--secondary); /* Verde Água */
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.service-card:hover i {
+    transform: scale(1.1);
+    color: var(--primary); /* Muda para laranja no hover */
+}
+
+.service-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    color: var(--text-body);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* Link textual simples */
+.service-card a {
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.service-card a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* ===== 5. DEPOIMENTOS (EDITORIAL) ===== */
+.testimonials-section {
+    padding: 6rem 5%;
+    background-color: var(--white);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+}
+
+.testimonial-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-left: 4px solid var(--secondary); /* Linha lateral colorida */
+    box-shadow: var(--shadow-sm);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    transition: var(--transition);
+}
+
+.testimonial-card:hover {
+    background: #FAFAFA;
+    transform: translateX(5px);
+}
+
+.testimonial-card p {
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-body);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+.client-info h4 {
+    margin-bottom: 0.2rem;
+    font-size: 1rem;
+    color: var(--dark);
+}
+
+.client-info span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+/* ===== 6. CTA FINAL (DARK MODE ELEGANCE) ===== */
+.final-cta {
+    margin: 4rem 5% 6rem;
+    padding: 5rem 2rem;
+    /* Gradiente escuro e sério */
+    background: linear-gradient(135deg, var(--dark) 0%, #3a3f4b 100%);
+    border-radius: var(--radius-md);
+    text-align: center;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decoração abstrata sutil */
+.final-cta::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 200px; height: 100%;
+    background: var(--primary);
+    opacity: 0.05;
+    transform: skewX(-20deg) translateX(50%);
+}
+
+.final-cta h2 {
+    color: var(--white);
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+}
+
+.final-cta p {
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1rem;
+}
+
+/* Botão branco para contraste */
+.final-cta .btn-primary {
+    background: var(--white);
+    color: var(--dark);
+    padding: 18px 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.final-cta .btn-primary:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 2rem;
+        min-height: auto;
+    }
+
+    .hero-content {
+        padding-right: 0;
+        margin-bottom: 3rem;
+    }
+
+    .hero h1 em::after {
+        left: 50%;
+        transform: skewX(-15deg) translateX(-50%);
+        width: 140px;
+    }
+
+    .cta-wrapper {
+        justify-content: center;
+    }
+
+    .hero-image {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-image img, .hero-image::after {
+        height: 400px;
+        max-width: 100%;
+        /* Ajuste do arco para mobile */
+        border-radius: 150px 150px 20px 20px;
+    }
+
+    .hero-image::after {
+        right: 0;
+        top: 15px;
+    }
+    
+    .trust-bar {
+        padding: 3rem 1rem;
+    }
+    
+    .logos-grid {
+        gap: 30px;
+    }
+    
+    .logo-item img {
+        height: 25px; /* Logos menores no mobile */
+    }
+}
