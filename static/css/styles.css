@@ -411,3 +411,132 @@ footer {
     .mobile-header { display: flex; }
     .flash-container { top: 80px; left: 20px; width: auto; }
 }
+/* Item 1: Início (Laranja - Padrão) */
+.yarn-nav a.yarn-ball:nth-of-type(1):hover,
+.yarn-nav a.yarn-ball:nth-of-type(1).active {
+    background: var(--primary);
+    border-color: var(--primary-light);
+}
+.yarn-nav a.yarn-ball:nth-of-type(1):hover .yarn-label {
+    background: var(--primary);
+}
+.yarn-nav a.yarn-ball:nth-of-type(1):hover .yarn-label::before {
+    background: var(--primary);
+}
+
+/* Item 2: Serviços (Verde Água) */
+.yarn-nav a.yarn-ball:nth-of-type(2):hover,
+.yarn-nav a.yarn-ball:nth-of-type(2).active {
+    background: var(--secondary);
+    border-color: #7BE4D8;
+    color: white;
+}
+.yarn-nav a.yarn-ball:nth-of-type(2):hover .yarn-label {
+    background: var(--secondary);
+}
+.yarn-nav a.yarn-ball:nth-of-type(2):hover .yarn-label::before {
+    background: var(--secondary);
+}
+
+/* Item 3: Hospital (Azul/Roxo Profissional) */
+.yarn-nav a.yarn-ball:nth-of-type(3):hover,
+.yarn-nav a.yarn-ball:nth-of-type(3).active {
+    background: #5D5FEF; /* Cor nova personalizada */
+    border-color: #8F91FF;
+    color: white;
+}
+.yarn-nav a.yarn-ball:nth-of-type(3):hover .yarn-label {
+    background: #5D5FEF;
+}
+.yarn-nav a.yarn-ball:nth-of-type(3):hover .yarn-label::before {
+    background: #5D5FEF;
+}
+
+/* Item 4: Agendar/Contato (Amarelo ou Verde Sucesso) */
+.yarn-nav a.yarn-ball:nth-of-type(4):hover,
+.yarn-nav a.yarn-ball:nth-of-type(4).active {
+    background: var(--success); /* Verde Sucesso */
+    border-color: #69F0AE;
+    color: white;
+}
+.yarn-nav a.yarn-ball:nth-of-type(4):hover .yarn-label {
+    background: var(--success);
+}
+.yarn-nav a.yarn-ball:nth-of-type(4):hover .yarn-label::before {
+    background: var(--success);
+}
+
+
+/* --- 2. CORREÇÃO DO MENU MOBILE --- */
+
+@media (max-width: 900px) {
+    /* Garante que o sidebar fique oculto inicialmente */
+    .yarn-sidebar {
+        display: none;
+        transition: opacity 0.3s ease;
+        opacity: 0;
+    }
+
+    /* ESTADO ATIVO: Quando a classe .active é adicionada pelo JS */
+    .yarn-sidebar.active {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        opacity: 1;
+        
+        /* Ocupa a tela toda */
+        position: fixed;
+        top: var(--header-height-mobile); /* Logo abaixo do header */
+        left: 0;
+        width: 100%;
+        height: calc(100vh - var(--header-height-mobile));
+        
+        background: rgba(255, 255, 255, 0.98); /* Fundo branco quase sólido */
+        backdrop-filter: blur(10px);
+        z-index: 1999;
+        box-shadow: none;
+        border-right: none;
+    }
+
+    /* Ajustes visuais internos do menu mobile */
+    .yarn-sidebar.active .yarn-nav {
+        gap: 2rem;
+    }
+
+    .yarn-sidebar.active .yarn-string {
+        display: none; /* Remove o fio no mobile para limpar o visual */
+    }
+
+    /* Labels sempre visíveis no mobile */
+    .yarn-sidebar.active .yarn-label {
+        opacity: 1;
+        position: static; /* Remove posição absoluta */
+        transform: none;
+        background: transparent;
+        color: var(--dark);
+        box-shadow: none;
+        font-size: 1.2rem;
+        padding: 0;
+        margin-top: 10px;
+        pointer-events: auto;
+    }
+    
+    .yarn-sidebar.active .yarn-label::before {
+        display: none; /* Remove a setinha do label */
+    }
+
+    .yarn-sidebar.active .yarn-ball {
+        width: 60px;
+        height: 60px;
+        flex-direction: column; /* Ícone em cima, texto embaixo */
+        overflow: visible;
+        background: var(--light);
+        border: 2px solid #eee;
+        border-radius: 15px; /* Quadrado arredondado no mobile fica melhor */
+    }
+    
+    /* Remove a textura de bola no mobile para limpar */
+    .yarn-sidebar.active .ball-texture {
+        display: none; 
+    }
+}
